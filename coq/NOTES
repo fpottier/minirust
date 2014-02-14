@@ -1,0 +1,38 @@
+This is a (very preliminary) untyped core calculus for Rust.
+
+It is loosely based on the Redex formalisation of Rust provided to us
+by Niko Matsakis.
+
+What is omitted, for now:
+  primitive integers
+  functions, function calls
+  unions, match
+  vectors, indexing
+  fat pointers (also known as DSTs, for dynamically-sized types)
+
+What is modified with respect to Niko's calculus:
+
+  Blocks are dissolved into local variable definitions (SStackAlloc) and sequence (SSequence, SSkip).
+
+  All types are removed and replaced with sizes.
+    field projection uses an offset (SFieldProj)
+    copy lvalue specifies a size (SCopy)
+    struct constants are replaced with the concatenation of two rvalues (SConsecutive)
+      and its neutral element (SNothing)
+    new carries a size (SNew) instead of an lvalue
+  We have the property that the size of every [rv] is statically computable
+  De-allocation in the heap is explicit (SDelete)
+
+  We do not allow arbitrary lvalues to appear directly in statements & rvalues
+    instead, "let x = lv in st" evaluates an lvalue (SLetLValue) and binds the result
+    (a location) to the temporary [x], for use in the statement [st].
+    Thus (for instance) "*x = copy 1 *y" is replaced with
+    "let cx = *x in let cy = *y in x = copy 1 y".
+
+  "new z" is no longer an rvalue; it is an lvalue
+    thus, instead of writing "x = new z", we write "let y = new z in x = &y"
+    this allows us to avoid a redundancy between SAddressOf and SNew
+
+  It turns out, at this point, that SStackAlloc need not be primitive;
+  it can be defined in terms of let, new, delete, sequence.
+

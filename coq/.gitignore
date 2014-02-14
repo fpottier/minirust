@@ -1,0 +1,17 @@
+# /coq/
+*.glob
+*.vo
+*.o
+*.v.d
+_shadow
+coqj
+coqj.ml
+coq2html
+coq2html.ml
+coq2index
+coq2index.ml
+targets
+cores
+*.cmx
+*.cmi
+*.cmo

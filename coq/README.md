@@ -1,3 +1,5 @@
+Coq 8.4 is required.
+
 LibTactics              General-purpose tactics by Arthur Charguéraud.
 MyTactics               General-purpose tactics.
 

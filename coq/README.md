@@ -1,9 +1,8 @@
-General-purpose Coq tactics:
-
-| File                  | Contents
-| --------------------- | ---------------------------------------------------------------
-| LibTactics            | General-purpose tactics by Arthur Charguéraud.
-| MyTactics             | General-purpose tactics.
+| Group | File                  | Contents
+| ----- | --------------------- | ---------------------------------------------------------------
+| General-purpose Coq tactics  ||
+|       | LibTactics            | General-purpose tactics by Arthur Charguéraud.
+|       | MyTactics             | General-purpose tactics.
 
 General-purpose Coq libraries:
 
